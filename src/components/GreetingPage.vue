@@ -48,7 +48,6 @@
             <h2 class="font-bold text-lg">
               CONGRATZ {{ name }}, YOU GOT {{ selectedGift }} FROM US!
             </h2>
-            <!-- Tambahkan animasi atau gambar pendukung di sini -->
           </div>
         </div>
       </div>
@@ -61,30 +60,28 @@ import bgHbd from "@/assets/bg-hbd.jpg";
 export default {
   data() {
     return {
-      name: "", // Nama pengguna
-      dateOfBirth: "", // Tanggal lahir pengguna (format YYYY-MM-DD)
+      name: "",
+      dateOfBirth: "",
       spinning: false,
       rotation: 0,
       bgHbd: bgHbd,
       hasSpun: false,
       countdown: "",
-      giftOptions: [], // Daftar hadiah yang tersedia untuk spinwheel
-      segmentColors: [], // Daftar warna untuk setiap segmen pada spinwheel
-      showForm: false, // Flag untuk menampilkan/menyembunyikan input field
-      wishlistInput: "", // Input wishlist pengguna
-      wishlistIndex: 0, // Indeks wishlist saat ini
-      showLuckySpin: false, // Flag untuk menampilkan/menyembunyikan spin beruntung
-      selectedGift: "" // Hadiah yang terpilih
+      giftOptions: [],
+      segmentColors: [],
+      showForm: false,
+      wishlistInput: "",
+      wishlistIndex: 0,
+      showLuckySpin: false,
+      selectedGift: ""
     };
   },
   computed: {
     isBirthday() {
-      // Cek apakah hari ini adalah ulang tahun pengguna
       const today = new Date().toISOString().slice(0, 10);
       return today === this.dateOfBirth;
     },
     dateOfBirthFormatted() {
-      // Format tanggal lahir menjadi DD-MM-YYYY
       if (this.dateOfBirth) {
         const [year, month, day] = this.dateOfBirth.split("-");
         return `${day}-${month}-${year}`;
@@ -110,26 +107,21 @@ export default {
     },
     spinWheel() {
       this.spinning = true;
-      // Lakukan pengacakan hadiah
       const randomIndex = Math.floor(Math.random() * this.giftOptions.length);
       this.selectedGift = this.giftOptions[randomIndex];
-      // Atur rotasi spinwheel untuk mendaratkan pada hadiah terpilih
       const rotationStep = 360 / this.giftOptions.length;
       this.rotation = (rotationStep * randomIndex) + (rotationStep / 2);
       setTimeout(() => {
         this.spinning = false;
         this.hasSpun = true;
-      }, 5000); // Ganti 5000 dengan durasi animasi spinwheel
+      }, 5000);
     }
   },
   mounted() {
-    // Dapatkan data pengguna dari localStorage
     this.name = localStorage.getItem("name");
     this.dateOfBirth = localStorage.getItem("dateOfBirth");
   },
 };
 </script>
 
-<style>
-/* Tambahkan gaya Anda di sini */
-</style>
+
